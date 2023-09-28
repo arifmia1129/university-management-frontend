@@ -2,13 +2,14 @@
 
 import { Button, Col, Row } from "antd";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import loginImg from "../../assets/login.png";
 import Form from "@/components/Forms/Form";
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import FormInput from "@/components/Forms/FormInput";
 import { useUserLoginMutation } from "@/redux/features/auth/authApi";
-import { storeToken } from "@/services/auth.service";
+import { getUserInfo, isLoggedIn, storeToken } from "@/services/auth.service";
+import { useRouter } from "next/navigation";
 
 type FormValues = {
   id: string;
@@ -16,12 +17,24 @@ type FormValues = {
 };
 
 const Login = () => {
+  const router = useRouter();
   const [userLogin] = useUserLoginMutation();
+
+  const isUserLoggedIn = isLoggedIn();
+
+  useEffect(() => {
+    if (isUserLoggedIn) {
+      router.push("/profile");
+    }
+  }, [isUserLoggedIn]);
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
       const res = await userLogin(data).unwrap();
-      storeToken(res?.data?.accessToken);
+      if (res?.data?.accessToken) {
+        storeToken(res?.data?.accessToken);
+        router.push("/profile");
+      }
     } catch (error) {
       console.error(error);
     }
