@@ -7,6 +7,7 @@ import loginImg from "../../assets/login.png";
 import Form from "@/components/Forms/Form";
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import FormInput from "@/components/Forms/FormInput";
+import { useUserLoginMutation } from "@/redux/features/auth/authApi";
 
 type FormValues = {
   id: string;
@@ -14,9 +15,12 @@ type FormValues = {
 };
 
 const Login = () => {
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
+  const [userLogin] = useUserLoginMutation();
+
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
-      console.log(data);
+      const res = await userLogin(data).unwrap();
+      console.log(res);
     } catch (error) {
       console.log(error);
     }
