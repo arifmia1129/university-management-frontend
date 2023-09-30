@@ -3,6 +3,7 @@
 import React from "react";
 import { Layout } from "antd";
 import UMBreadCrumb from "./UMBreadCrumb";
+import Header from "./Header";
 
 const { Content } = Layout;
 
@@ -11,6 +12,7 @@ const base = "admin";
 const Contents = ({ children }: { children: React.ReactNode }) => {
   return (
     <Content>
+      <Header />
       <UMBreadCrumb
         items={[
           {

@@ -3,3 +3,8 @@ export interface IMeta {
   limit: number;
   size: number;
 }
+
+export interface ICustomResponse {
+  data: any;
+  meta: IMeta;
+}

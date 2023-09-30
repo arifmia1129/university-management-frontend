@@ -1,14 +1,27 @@
 "use client";
-
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Layout, Menu } from "antd";
 import { SidebarItems } from "@/constants/sidebarItems";
+import { getUserInfo } from "@/services/auth.service";
 import { USER_ROLE } from "@/constants/role";
+import type { MenuProps } from "antd";
 
 const { Sider } = Layout;
 
 const Sidebar = () => {
+  const [menuItems, setMenuItems] = useState<MenuProps["items"]>([]);
   const [collapsed, setCollapsed] = useState(false);
+
+  const { role } = getUserInfo() as { role: string };
+
+  const items = SidebarItems(role);
+
+  useEffect(() => {
+    if (role && items.length && !menuItems?.length) {
+      setMenuItems(items);
+    }
+  }, [menuItems, items, role]);
+
   return (
     <Sider
       collapsible
@@ -24,24 +37,25 @@ const Sidebar = () => {
         bottom: 0,
       }}
     >
-      <div>
-        <h2
-          style={{
-            color: "#fff",
-            textAlign: "center",
-            marginTop: 10,
-            marginBottom: 5,
-          }}
-        >
-          PH University
-        </h2>
-      </div>
-      <Menu
-        theme="dark"
-        defaultSelectedKeys={["1"]}
-        mode="inline"
-        items={SidebarItems(USER_ROLE.SUPER_ADMIN)}
-      />
+      <h2
+        style={{
+          color: "#fff",
+          textAlign: "center",
+          marginTop: 10,
+          marginBottom: 5,
+        }}
+      >
+        PH University
+      </h2>
+      {Array.isArray(menuItems) && menuItems.length && (
+        <Menu
+          style={{ padding: 10 }}
+          theme="dark"
+          defaultSelectedKeys={["1"]}
+          mode="inline"
+          items={menuItems}
+        />
+      )}
     </Sider>
   );
 };

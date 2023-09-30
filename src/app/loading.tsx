@@ -1,11 +1,12 @@
+import Loading from "@/components/ui/Loading";
 import React from "react";
 
-const Loading = () => {
+const LoadingPage = () => {
   return (
-    <div>
-      <h1>Loading...</h1>
-    </div>
+    <>
+      <Loading />
+    </>
   );
 };
 
-export default Loading;
+export default LoadingPage;
