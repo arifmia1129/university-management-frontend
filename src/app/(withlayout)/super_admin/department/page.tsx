@@ -1,19 +1,16 @@
 "use client";
 
-import Form from "@/components/Forms/Form";
-import FormInput from "@/components/Forms/FormInput";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import UMTable from "@/components/ui/UMTable";
 import { superAdminItems } from "@/constants/breadCrumbItem";
 
 import {
-  useAddManagementDepartmentMutation,
+  useDeleteManagementDepartmentMutation,
   useGetManagementDepartmentQuery,
 } from "@/redux/features/managementDepartment/managementDepartmentApi";
-import { manageDepartmentSchema } from "@/schema/managementDepartmentSchema";
-import { yupResolver } from "@hookform/resolvers/yup";
+
 import { Button, Col, Input, Row, message } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   EyeOutlined,
   EditOutlined,
@@ -22,6 +19,8 @@ import {
 } from "@ant-design/icons";
 import ActionBar from "@/components/ui/ActionBar/ActionBar";
 import Link from "next/link";
+import { useDebounced } from "@/utils/hooks";
+import dayjs from "dayjs";
 
 const ManagementDepartment = () => {
   const fetchQuery: Record<string, any> = {};
@@ -42,25 +41,18 @@ const ManagementDepartment = () => {
     ...fetchQuery,
   });
 
-  const items = [
-    ...superAdminItems,
-    {
-      label: `manage-admin`,
-      link: `super_admin/admin`,
-    },
-  ];
-  const [addManagementDepartment] = useAddManagementDepartmentMutation();
+  const [deleteDepartment, { isLoading: isDeleteing }] =
+    useDeleteManagementDepartmentMutation();
 
-  const onSubmit = async (data: any) => {
-    console.log("hello");
-    message.loading("Creating...");
-    try {
-      addManagementDepartment(data);
-      message.success("Successfully created");
-    } catch (error: any) {
-      message.error(error?.message);
+  const debouncedSearchTerm = useDebounced(searchTerm, 600);
+
+  useEffect(() => {
+    if (debouncedSearchTerm) {
+      fetchQuery["searchTerm"] = debouncedSearchTerm;
     }
-  };
+  }, [debouncedSearchTerm]);
+
+  const items = [...superAdminItems];
 
   const columns = [
     {
@@ -71,6 +63,9 @@ const ManagementDepartment = () => {
       title: "Created At",
       dataIndex: "createdAt",
       sorter: true,
+      render: (data: any) => {
+        return data && dayjs(data).format("D-MM-YYYY, hh:mm:ss A");
+      },
     },
 
     {
@@ -78,17 +73,16 @@ const ManagementDepartment = () => {
       render: function (data: any) {
         return (
           <>
-            <Button onClick={() => console.log(data)} type="primary">
-              <EyeOutlined />
-            </Button>
+            <Link href={`/super_admin/department/edit/${data._id}`}>
+              <Button style={{ margin: "0px 5px" }} type="primary">
+                <EditOutlined />
+              </Button>
+            </Link>
             <Button
-              style={{ margin: "0px 5px" }}
-              onClick={() => console.log(data)}
+              onClick={() => deleteDepartment(data?._id)}
               type="primary"
+              danger
             >
-              <EditOutlined />
-            </Button>
-            <Button onClick={() => console.log(data)} type="primary" danger>
               <DeleteOutlined />
             </Button>
           </>
@@ -131,7 +125,7 @@ const ManagementDepartment = () => {
   return (
     <div>
       <UMBreadCrumb items={items} />
-      <ActionBar title="Admin List">
+      <ActionBar title="Management Departments">
         <Input
           value={searchTerm}
           placeholder="Search anything..."
@@ -159,7 +153,7 @@ const ManagementDepartment = () => {
         }}
       >
         <UMTable
-          loading={isLoading}
+          loading={isLoading || isDeleteing}
           columns={columns}
           dataSource={data?.department}
           paginationOptions={paginationOptions}

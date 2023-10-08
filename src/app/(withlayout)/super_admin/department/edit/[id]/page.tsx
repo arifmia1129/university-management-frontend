@@ -2,15 +2,23 @@
 
 import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
+import ActionBar from "@/components/ui/ActionBar/ActionBar";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import { superAdminItems } from "@/constants/breadCrumbItem";
-
-import { useAddManagementDepartmentMutation } from "@/redux/features/managementDepartment/managementDepartmentApi";
+import {
+  useGetManagementDepartmentByIdQuery,
+  useUpdateManagementDepartmentMutation,
+} from "@/redux/features/managementDepartment/managementDepartmentApi";
 import { manageDepartmentSchema } from "@/schema/managementDepartmentSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Col, Row, message } from "antd";
 
-const CreateManagementDepartment = () => {
+export default function DepartmentEditPage({ params }: { params: any }) {
+  const { id } = params;
+
+  const { data, isLoading } = useGetManagementDepartmentByIdQuery(id);
+  const [updateDepartment] = useUpdateManagementDepartmentMutation();
+
   const items = [
     ...superAdminItems,
     {
@@ -18,25 +26,30 @@ const CreateManagementDepartment = () => {
       link: `super_admin/department`,
     },
   ];
-  const [addManagementDepartment] = useAddManagementDepartmentMutation();
 
   const onSubmit = async (data: any) => {
-    console.log("hello");
-    message.loading("Creating...");
+    message.loading("Updating...");
+    console.log(id);
     try {
-      addManagementDepartment(data);
-      message.success("Successfully created");
+      updateDepartment({
+        data: {
+          title: data.title,
+        },
+        id,
+      });
+      message.success("Successfully updated department");
     } catch (error: any) {
       message.error(error?.message);
     }
   };
-
   return (
     <div>
       <UMBreadCrumb items={items} />
+      <ActionBar title="Edit Department"></ActionBar>
       <Form
         submitHandler={onSubmit}
         resolver={yupResolver(manageDepartmentSchema)}
+        defaultValues={data}
       >
         <div
           style={{
@@ -61,11 +74,9 @@ const CreateManagementDepartment = () => {
           </Row>
         </div>
         <Button type="primary" htmlType="submit">
-          Create
+          Update
         </Button>
       </Form>
     </div>
   );
-};
-
-export default CreateManagementDepartment;
+}
