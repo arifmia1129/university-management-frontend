@@ -1,7 +1,5 @@
 import { baseApi } from "./features/api/apiSlice";
 
-const reducer = {
+export const rootReducer = {
   [baseApi.reducerPath]: baseApi.reducer,
 };
-
-export default reducer;

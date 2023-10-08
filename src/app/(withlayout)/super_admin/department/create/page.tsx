@@ -1,21 +1,11 @@
 "use client";
 
 import Form from "@/components/Forms/Form";
-import FormDatePicker from "@/components/Forms/FormDatePicker";
 import FormInput from "@/components/Forms/FormInput";
-import FormSelectField from "@/components/Forms/FormSelectField";
-import FormTextArea from "@/components/Forms/FormTextArea";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
-import UMTable from "@/components/ui/UMTable";
-import Uploader from "@/components/ui/Uploader";
 import { superAdminItems } from "@/constants/breadCrumbItem";
-import {
-  bloodGroupOptions,
-  genderOptions,
-  manageDepartmentOptions,
-} from "@/constants/global";
+
 import { useAddManagementDepartmentMutation } from "@/redux/features/managementDepartment/managementDepartmentApi";
-import { adminSchema } from "@/schema/admin";
 import { manageDepartmentSchema } from "@/schema/managementDepartmentSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Col, Row, message } from "antd";
@@ -26,6 +16,10 @@ const CreateManagementDepartment = () => {
     {
       label: `manage-admin`,
       link: `super_admin/admin`,
+    },
+    {
+      label: `departments`,
+      link: `super_admin/department`,
     },
   ];
   const [addManagementDepartment] = useAddManagementDepartmentMutation();
@@ -74,13 +68,6 @@ const CreateManagementDepartment = () => {
           Create
         </Button>
       </Form>
-      <div
-        style={{
-          margin: "10px 0",
-        }}
-      >
-        <UMTable />
-      </div>
     </div>
   );
 };

@@ -36,8 +36,9 @@ const Login = () => {
         router.push("/profile");
         message.success("Successfully logged in");
       }
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      console.log(error.response.data.message);
+      message.error(error?.message || "Something went wrong");
     }
   };
   return (

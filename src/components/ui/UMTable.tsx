@@ -1,77 +1,35 @@
 import { Button, Table } from "antd";
 
-const UMTable = () => {
-  const columns = [
-    {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: "Age",
-      dataIndex: "age",
-      key: "age",
-      sorter: (a: any, b: any) => a - b,
-    },
-    {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
-    },
-    {
-      title: "Action",
-      render: function (data: any) {
-        return (
-          <Button onClick={() => console.log(data)} type="primary" danger>
-            X
-          </Button>
-        );
-      },
-    },
-  ];
+type PaginationOptions = {
+  pageSize?: number;
+  total?: number;
+  showSizeChanger: boolean;
+  onChange: (page: number, size: number) => void;
+};
 
-  const dataSource = [
-    {
-      key: "1",
-      name: "Mike",
-      age: 32,
-      address: "10 Downing Street",
-    },
-    {
-      key: "2",
-      name: "John",
-      age: 42,
-      address: "10 Downing Street",
-    },
-  ];
+interface ITableProps {
+  loading: boolean;
+  columns: any;
+  dataSource: any;
+  showPagination: boolean;
+  paginationOptions: PaginationOptions;
+  handleChangeTableOptions: (pagination: any, filter: any, sorter: any) => void;
+}
 
-  const handleChangePaginationOptions = (page: number, size: number): void => {
-    console.log("page:", page, "size:", size);
-  };
-
-  const paginationOptions = {
-    pageSize: 5,
-    total: 10,
-    pageSizeOptions: [5, 10, 20],
-    showSizeChanger: true,
-    onChange: handleChangePaginationOptions,
-  };
-
-  const handleChangeTableOptions = (
-    pagination: any,
-    filter: any,
-    sorter: any
-  ) => {
-    const { order, field } = sorter;
-    console.log(order, field);
-  };
-
+const UMTable = ({
+  loading = false,
+  columns,
+  dataSource,
+  paginationOptions,
+  handleChangeTableOptions,
+  showPagination,
+}: ITableProps) => {
   return (
     <Table
-      loading={false}
+      loading={loading}
       columns={columns}
       dataSource={dataSource}
-      pagination={paginationOptions}
+      pagination={showPagination ? paginationOptions : false}
       onChange={handleChangeTableOptions}
     />
   );

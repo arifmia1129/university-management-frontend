@@ -32,11 +32,7 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   // @ts-ignore
   function (response) {
-    const modifiedResponse: ICustomResponse = {
-      data: response?.data?.data,
-      meta: response?.data?.meta,
-    };
-    return modifiedResponse;
+    return response;
   },
   function (error) {
     // Any status codes that fall outside the range of 2xx cause this function to trigger
