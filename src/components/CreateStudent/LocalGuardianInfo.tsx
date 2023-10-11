@@ -17,7 +17,7 @@ const LocalGuardianInfo = () => {
         <Col style={{ margin: "15px 0" }} className="gutter-row" span={6}>
           <div>
             <FormInput
-              name="guardiant.localGuardian.name"
+              name="student.localGuardian.name"
               type="text"
               size="large"
               label="Name"
@@ -28,7 +28,7 @@ const LocalGuardianInfo = () => {
         <Col style={{ margin: "15px 0" }} className="gutter-row" span={6}>
           <div>
             <FormInput
-              name="guardiant.localGuardian.occupation"
+              name="student.localGuardian.occupation"
               type="text"
               size="large"
               label="Occupation"
@@ -39,7 +39,7 @@ const LocalGuardianInfo = () => {
         <Col style={{ margin: "15px 0" }} className="gutter-row" span={6}>
           <div>
             <FormInput
-              name="guardiant.localGuardian.contactNo"
+              name="student.localGuardian.contactNo"
               type="text"
               size="large"
               label="Contact Number"
@@ -50,7 +50,7 @@ const LocalGuardianInfo = () => {
         <Col style={{ margin: "15px 0" }} className="gutter-row" span={6}>
           <div>
             <FormInput
-              name="guardiant.localGuardian.address"
+              name="student.localGuardian.address"
               type="text"
               size="large"
               label="Address"

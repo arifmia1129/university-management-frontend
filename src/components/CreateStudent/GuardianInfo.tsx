@@ -30,7 +30,7 @@ const GuardianInfo = () => {
           <Col style={{ margin: "15px 0" }} className="gutter-row" span={8}>
             <div>
               <FormInput
-                name="guardiant.father.name"
+                name="student.guardian.father.name"
                 type="text"
                 size="large"
                 label="Name"
@@ -41,7 +41,7 @@ const GuardianInfo = () => {
           <Col style={{ margin: "15px 0" }} className="gutter-row" span={8}>
             <div>
               <FormInput
-                name="guardiant.father.occupation"
+                name="student.guardian.father.occupation"
                 type="text"
                 size="large"
                 label="Occupation"
@@ -52,7 +52,7 @@ const GuardianInfo = () => {
           <Col style={{ margin: "15px 0" }} className="gutter-row" span={8}>
             <div>
               <FormInput
-                name="guardiant.father.contactNo"
+                name="student.guardian.father.contactNo"
                 type="text"
                 size="large"
                 label="Contact Number"
@@ -77,7 +77,7 @@ const GuardianInfo = () => {
           <Col style={{ margin: "15px 0" }} className="gutter-row" span={8}>
             <div>
               <FormInput
-                name="guardiant.mother.name"
+                name="student.guardian.mother.name"
                 type="text"
                 size="large"
                 label="Name"
@@ -88,7 +88,7 @@ const GuardianInfo = () => {
           <Col style={{ margin: "15px 0" }} className="gutter-row" span={8}>
             <div>
               <FormInput
-                name="guardiant.mother.occupation"
+                name="student.guardian.mother.occupation"
                 type="text"
                 size="large"
                 label="Occupation"
@@ -99,10 +99,10 @@ const GuardianInfo = () => {
           <Col style={{ margin: "15px 0" }} className="gutter-row" span={8}>
             <div>
               <FormInput
-                name="guardiant.mother.contactNo"
+                name="student.guardian.mother.contactNo"
                 type="text"
                 size="large"
-                label="Occupation"
+                label="Contact Number"
                 placeholder="Write mother contact number"
               />
             </div>
@@ -122,7 +122,7 @@ const GuardianInfo = () => {
           <Col style={{ margin: "15px 0" }} className="gutter-row" span={12}>
             <div>
               <FormInput
-                name="guardiant.address"
+                name="student.guardian.address"
                 type="text"
                 size="large"
                 label="Guardiant Address"

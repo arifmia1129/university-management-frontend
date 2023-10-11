@@ -4,3 +4,10 @@ export const superAdminItems = [
     link: `super_admin`,
   },
 ];
+
+export const adminItems = [
+  {
+    label: `admin`,
+    link: `admin`,
+  },
+];

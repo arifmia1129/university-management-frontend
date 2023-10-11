@@ -22,7 +22,7 @@ const StudentBasicInfo = () => {
         <Col style={{ margin: "15px 0" }} className="gutter-row" span={8}>
           <div>
             <FormInput
-              name="email"
+              name="student.email"
               type="text"
               size="large"
               label="Email"
@@ -33,7 +33,7 @@ const StudentBasicInfo = () => {
         <Col style={{ margin: "15px 0" }} className="gutter-row" span={8}>
           <div>
             <FormInput
-              name="contactNo"
+              name="student.contactNo"
               type="text"
               size="large"
               label="Contact Number"
@@ -44,7 +44,7 @@ const StudentBasicInfo = () => {
         <Col style={{ margin: "15px 0" }} className="gutter-row" span={8}>
           <div>
             <FormInput
-              name="emergencyContactNo"
+              name="student.emergencyContactNo"
               type="text"
               size="large"
               label="Emergency Contact"
@@ -55,7 +55,7 @@ const StudentBasicInfo = () => {
         <Col style={{ margin: "15px 0" }} className="gutter-row" span={8}>
           <div>
             <FormSelectField
-              name="bloodGroup"
+              name="student.bloodGroup"
               size="large"
               label="Blood Group"
               items={bloodGroupOptions}
@@ -66,7 +66,7 @@ const StudentBasicInfo = () => {
         <Col style={{ margin: "15px 0" }} className="gutter-row" span={8}>
           <div>
             <FormDatePicker
-              name="dateOfBirth"
+              name="student.dateOfBirth"
               size="large"
               label="Date of Birth"
               placeholder="Write date of birth"
@@ -76,7 +76,7 @@ const StudentBasicInfo = () => {
         <Col style={{ margin: "15px 0" }} className="gutter-row" span={12}>
           <div>
             <FormTextArea
-              name="presentAddress"
+              name="student.presentAddress"
               size="large"
               label="Present Address"
               placeholder="Write present address"
@@ -86,7 +86,7 @@ const StudentBasicInfo = () => {
         <Col style={{ margin: "15px 0" }} className="gutter-row" span={12}>
           <div>
             <FormTextArea
-              name="permanentAddress"
+              name="student.permanentAddress"
               size="large"
               label="Permanent Address"
               placeholder="Write permanent address"

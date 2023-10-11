@@ -30,35 +30,35 @@ export const manageDepartmentOptions = [
 export const bloodGroupOptions = [
   {
     label: "A+",
-    value: "A+",
+    value: "a+",
   },
   {
     label: "A-",
-    value: "A-",
+    value: "a-",
   },
   {
     label: "B+",
-    value: "B+",
+    value: "b+",
   },
   {
     label: "B-",
-    value: "B-",
+    value: "b-",
   },
   {
     label: "AB+",
-    value: "AB+",
+    value: "ab+",
   },
   {
     label: "AB-",
-    value: "AB-",
+    value: "ab-",
   },
   {
     label: "O+",
-    value: "O+",
+    value: "o+",
   },
   {
     label: "O-",
-    value: "O-",
+    value: "o-",
   },
 ];
 
@@ -150,3 +150,69 @@ export const academicFacultyOptions = [
     value: "law",
   },
 ];
+
+export const semesterOptions = [
+  {
+    label: "Autumn",
+    value: "Autumn",
+  },
+  {
+    label: "Summer",
+    value: "Summer",
+  },
+  {
+    label: "Fall",
+    value: "Fall",
+  },
+];
+
+export const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+export const monthOptions = months.map((month) => {
+  return {
+    label: month,
+    value: month,
+  };
+});
+
+const days = [
+  "SATURDAY",
+  "SUNDAY",
+  "MONDAY",
+  "TUESDAY",
+  "WEDNESDAY",
+  "THURSDAY",
+  "FRIDAY",
+];
+
+export const daysOptions = days.map((day: string) => {
+  return {
+    label: day,
+    value: day,
+  };
+});
+
+const semesterRegistrationStatus = ["UPCOMING", "ONGOING", "ENDED"];
+
+export const semesterRegistrationStatusOptions = semesterRegistrationStatus.map(
+  (status: string) => {
+    return {
+      label: status,
+      value: status,
+      disabled: false,
+    };
+  }
+);

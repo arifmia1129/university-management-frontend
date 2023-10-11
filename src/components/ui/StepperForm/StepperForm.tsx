@@ -13,15 +13,20 @@ interface IStep {
 const StepperForm = ({
   steps,
   submitHander,
+  persistKey,
 }: {
   steps: IStep[];
+  persistKey: string;
   submitHander: (el: any) => void;
 }) => {
-  const [current, setCurrent] = useState(
-    !!getFromLocalStorage("step")
-      ? Number(JSON.parse(getFromLocalStorage("step") as any)?.step)
-      : 0
-  );
+  const [current, setCurrent] = useState<any>(0);
+
+  useEffect(() => {
+    const steps = JSON.parse(getFromLocalStorage("step") as string).step;
+    if (steps) {
+      setCurrent(steps);
+    }
+  }, []);
 
   useEffect(() => {
     storeToLocalStorage("step", JSON.stringify({ step: current }));
@@ -36,8 +41,14 @@ const StepperForm = ({
   };
 
   const items = steps.map((item) => ({ key: item.title, title: item.title }));
+  const methods = useForm({
+    defaultValues: JSON.parse(getFromLocalStorage(persistKey) as string) || {},
+  });
+  const watch = methods.watch();
 
-  const methods = useForm();
+  useEffect(() => {
+    storeToLocalStorage(persistKey, JSON.stringify(watch));
+  }, [watch, methods, persistKey]);
 
   const { handleSubmit, reset } = methods;
 
@@ -45,6 +56,7 @@ const StepperForm = ({
     submitHander(data);
     reset();
     storeToLocalStorage("step", JSON.stringify({ step: 0 }));
+    storeToLocalStorage(persistKey, JSON.stringify({}));
     setCurrent(0);
   };
 

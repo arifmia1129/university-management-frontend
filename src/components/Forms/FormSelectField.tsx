@@ -10,6 +10,7 @@ interface IInput {
   defaultValue?: string;
   label?: string;
   items: Item[];
+  handleOnChange?: (value: string) => void;
 }
 
 const FormSelectField = ({
@@ -18,6 +19,7 @@ const FormSelectField = ({
   defaultValue,
   label,
   items,
+  handleOnChange,
 }: IInput) => {
   const { control } = useFormContext();
   return (
@@ -30,7 +32,7 @@ const FormSelectField = ({
           <Select
             defaultValue={defaultValue}
             size={size}
-            onChange={onChange}
+            onChange={handleOnChange ? (e) => handleOnChange(e) : onChange}
             options={items}
             value={value}
             style={{ width: "100%" }}

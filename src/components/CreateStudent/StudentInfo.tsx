@@ -4,15 +4,46 @@ import { Col, Row } from "antd";
 import React from "react";
 import FormInput from "../Forms/FormInput";
 import FormSelectField from "../Forms/FormSelectField";
-import {
-  academicDepartmentOptions,
-  academicFacultyOptions,
-  academicSemesterOptions,
-  genderOptions,
-} from "@/constants/global";
+import { genderOptions } from "@/constants/global";
 import Uploader from "../ui/Uploader";
+import { useGetAcademicFacultyQuery } from "@/redux/features/academicFaculty/academicFacultyApi";
+import { useGetAcademicDepartmentQuery } from "@/redux/features/academicDepartment/academicDepartmentApi";
+import { useGetAcademicSemesterQuery } from "@/redux/features/academicSemester/academicSemesterApi";
 
 const StudentInfo = () => {
+  const { data: academicDepartment } = useGetAcademicDepartmentQuery();
+
+  const academicDepartmentOptions = academicDepartment?.department?.map(
+    (department: any) => {
+      return {
+        label: department.title,
+        value: department.id,
+      };
+    }
+  );
+
+  const { data: academicFaculty } = useGetAcademicFacultyQuery();
+
+  const academicFacultyOptions = academicFaculty?.faculty?.map(
+    (faculty: any) => {
+      return {
+        label: faculty.title,
+        value: faculty.id,
+      };
+    }
+  );
+
+  const { data: academicSemester } = useGetAcademicSemesterQuery();
+
+  const academicSemesterOptions = academicSemester?.semester?.map(
+    (semester: any) => {
+      return {
+        label: semester.title,
+        value: semester.id,
+      };
+    }
+  );
+
   return (
     <div
       style={{
@@ -26,7 +57,7 @@ const StudentInfo = () => {
         <Col style={{ margin: "15px 0" }} className="gutter-row" span={6}>
           <div>
             <FormInput
-              name="name.firstName"
+              name="student.name.firstName"
               type="text"
               size="large"
               label="First Name"
@@ -37,7 +68,7 @@ const StudentInfo = () => {
         <Col style={{ margin: "15px 0" }} className="gutter-row" span={6}>
           <div>
             <FormInput
-              name="name.middleName"
+              name="student.name.middleName"
               type="text"
               size="large"
               label="Middle Name"
@@ -48,7 +79,7 @@ const StudentInfo = () => {
         <Col style={{ margin: "15px 0" }} className="gutter-row" span={6}>
           <div>
             <FormInput
-              name="name.lastName"
+              name="student.name.lastName"
               type="text"
               size="large"
               label="Last Name"
@@ -70,7 +101,7 @@ const StudentInfo = () => {
         <Col style={{ margin: "15px 0" }} className="gutter-row" span={6}>
           <div>
             <FormSelectField
-              name="academicSemester"
+              name="student.academicSemester"
               size="large"
               label="Academic Semester"
               items={academicSemesterOptions}
@@ -80,7 +111,7 @@ const StudentInfo = () => {
         <Col style={{ margin: "15px 0" }} className="gutter-row" span={6}>
           <div>
             <FormSelectField
-              name="academicDepartment"
+              name="student.academicDepartment"
               size="large"
               label="Academic Department"
               items={academicDepartmentOptions}
@@ -90,7 +121,7 @@ const StudentInfo = () => {
         <Col style={{ margin: "15px 0" }} className="gutter-row" span={6}>
           <div>
             <FormSelectField
-              name="academicFaculty"
+              name="student.academicFaculty"
               size="large"
               label="Academic Faculty"
               items={academicFacultyOptions}
@@ -100,7 +131,7 @@ const StudentInfo = () => {
         <Col style={{ margin: "15px 0" }} className="gutter-row" span={6}>
           <div>
             <FormSelectField
-              name="gender"
+              name="student.gender"
               size="large"
               label="Gender"
               items={genderOptions}
@@ -109,7 +140,7 @@ const StudentInfo = () => {
         </Col>
         <Col style={{ margin: "15px 0" }} className="gutter-row" span={6}>
           <div>
-            <Uploader />
+            <Uploader name="file" />
           </div>
         </Col>
       </Row>

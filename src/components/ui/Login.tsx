@@ -31,13 +31,13 @@ const Login = () => {
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
       const res = await userLogin(data);
-      if ("data" in res && res.data.accessToken) {
-        storeToken(res?.data?.accessToken);
+      if ("data" in res && res.data.data.accessToken) {
+        storeToken(res?.data?.data?.accessToken);
         router.push("/profile");
         message.success("Successfully logged in");
       }
     } catch (error: any) {
-      console.log(error.response.data.message);
+      //console.log(error.response.data.message);
       message.error(error?.message || "Something went wrong");
     }
   };

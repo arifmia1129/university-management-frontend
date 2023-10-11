@@ -8,16 +8,28 @@ import FormTextArea from "@/components/Forms/FormTextArea";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import Uploader from "@/components/ui/Uploader";
 import { superAdminItems } from "@/constants/breadCrumbItem";
+import { bloodGroupOptions, genderOptions } from "@/constants/global";
 import {
-  bloodGroupOptions,
-  genderOptions,
-  manageDepartmentOptions,
-} from "@/constants/global";
+  useAddAdminMutation,
+  useGetAdminQuery,
+} from "@/redux/features/admin/adminApi";
+import { useGetManagementDepartmentQuery } from "@/redux/features/managementDepartment/managementDepartmentApi";
 import { adminSchema } from "@/schema/admin";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button, Col, Row } from "antd";
+import { Button, Col, Row, message } from "antd";
 
 const CreateAdminPage = () => {
+  const { data, isLoading } = useGetManagementDepartmentQuery({});
+
+  const [addAdmin] = useAddAdminMutation();
+
+  const manageDepartmentOptions = data?.department?.map((department: any) => {
+    return {
+      label: department.title,
+      value: department._id,
+    };
+  });
+
   const items = [
     ...superAdminItems,
     {
@@ -27,8 +39,22 @@ const CreateAdminPage = () => {
   ];
 
   const onSubmit = async (data: any) => {
+    const file = data["file"];
+
+    delete data["file"];
+
+    const info = JSON.stringify(data);
+
+    //console.log(data);
+
+    const formData = new FormData();
+
+    formData.append("file", file);
+    formData.append("data", info);
+    message.loading("Creating admin...");
     try {
-      console.log(data);
+      addAdmin(formData);
+      message.success("Admin created successfully!");
     } catch (error) {
       console.error(error);
     }
@@ -37,7 +63,7 @@ const CreateAdminPage = () => {
   return (
     <div>
       <UMBreadCrumb items={items} />
-      <Form submitHandler={onSubmit} resolver={yupResolver(adminSchema)}>
+      <Form submitHandler={onSubmit}>
         <div
           style={{
             border: "1px solid #d9d9d9",
@@ -107,7 +133,7 @@ const CreateAdminPage = () => {
             <Col style={{ margin: "15px 0" }} className="gutter-row" span={8}>
               <div>
                 <FormSelectField
-                  name="admin.manageDepartment"
+                  name="admin.managementDepartment"
                   size="large"
                   label="Manage Department"
                   items={manageDepartmentOptions}
@@ -116,7 +142,7 @@ const CreateAdminPage = () => {
             </Col>
             <Col style={{ margin: "15px 0" }} className="gutter-row" span={8}>
               <div>
-                <Uploader />
+                <Uploader name="file" />
               </div>
             </Col>
           </Row>

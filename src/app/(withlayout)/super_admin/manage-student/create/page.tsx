@@ -40,9 +40,9 @@ const CreateStudentPage = () => {
 
   const handleStudentInfo = (data: any) => {
     try {
-      console.log(data);
+      //console.log(data);
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 
