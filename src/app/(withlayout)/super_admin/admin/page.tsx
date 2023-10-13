@@ -19,10 +19,15 @@ import dayjs from "dayjs";
 import DeleteModal from "@/components/Modal/DeleteModal";
 import {
   useDeleteAdminMutation,
+  useGetAdminByIdQuery,
   useGetAdminQuery,
 } from "@/redux/features/admin/adminApi";
 
-const AdminList = () => {
+const AdminList = ({ params }: any) => {
+  const { data: adminData } = useGetAdminByIdQuery(params.id);
+
+  console.log(adminData);
+
   const fetchQuery: Record<string, any> = {};
 
   const [size, setSize] = useState<number>(10);
@@ -111,6 +116,7 @@ const AdminList = () => {
     {
       title: "Action",
       render: function (data: any) {
+        // console.log(data);
         return (
           <>
             <Link href={`/super_admin/admin/details/${data._id}`}>
@@ -118,8 +124,14 @@ const AdminList = () => {
                 <EyeOutlined />
               </Button>
             </Link>
-            <Link href={`/super_admin/department/edit/${data._id}`}>
-              <Button style={{ margin: "0px 5px" }} type="primary">
+            <Link href={`/super_admin/admin/edit/${data._id}`}>
+              <Button
+                style={{
+                  margin: "0px 5px",
+                }}
+                onClick={() => console.log(data)}
+                type="primary"
+              >
                 <EditOutlined />
               </Button>
             </Link>
@@ -166,6 +178,24 @@ const AdminList = () => {
     setSortOrder("");
     setSortBy("");
     setSearchTerm("");
+  };
+
+  const defaultValues = {
+    name: {
+      firstName: adminData?.name?.firstName || "",
+      lastName: adminData?.name?.lastName || "",
+      middleName: adminData?.name?.middleName || "",
+    },
+    dateOfBirth: adminData?.dateOfBirth || "",
+    email: adminData?.email || "",
+    designation: adminData?.designation || "",
+    contactNo: adminData?.contactNo || "",
+    emergencyContactNo: adminData?.emergencyContactNo || "",
+    permanentAddress: adminData?.permanentAddress || "",
+    presentAddress: adminData?.presentAddress || "",
+    bloodGroup: adminData?.bloodGroup || "",
+    gender: adminData?.gender || "",
+    managementDepartment: adminData?.managementDepartment?.id || "",
   };
 
   return (

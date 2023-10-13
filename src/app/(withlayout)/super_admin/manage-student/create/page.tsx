@@ -7,6 +7,8 @@ import StudentInfo from "@/components/CreateStudent/StudentInfo";
 import StepperForm from "@/components/ui/StepperForm/StepperForm";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import { superAdminItems } from "@/constants/breadCrumbItem";
+import { useAddStudentMutation } from "@/redux/features/student/studentApi";
+import { message } from "antd";
 import React from "react";
 import { SubmitHandler } from "react-hook-form";
 
@@ -37,12 +39,26 @@ const CreateStudentPage = () => {
       content: <LocalGuardianInfo />,
     },
   ];
+  const [addStudent] = useAddStudentMutation();
+  const handleStudentInfo = async (data: any) => {
+    const file = data["file"];
 
-  const handleStudentInfo = (data: any) => {
+    delete data["file"];
+
+    const info = JSON.stringify(data);
+
+    const formData = new FormData();
+
+    formData.append("file", file);
+    formData.append("data", info);
+    message.loading("Creating student...");
     try {
-      //console.log(data);
+      const res = await addStudent(formData);
+      if (res.data.success) {
+        message.success("Student created successfully!");
+      }
     } catch (error) {
-      //console.log(error);
+      console.error(error);
     }
   };
 
@@ -50,6 +66,7 @@ const CreateStudentPage = () => {
     <div>
       <UMBreadCrumb items={items} />
       <StepperForm
+        persistKey="student-form-info"
         submitHander={(value) => handleStudentInfo(value)}
         steps={steps}
       />
