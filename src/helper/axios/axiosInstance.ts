@@ -1,4 +1,5 @@
 import { LOCAL_STORAGE_KEYS } from "@/constants/localStorageKeys";
+import { createNewAccessToken, storeToken } from "@/services/auth.service";
 import { ICustomResponse } from "@/types";
 import { getFromLocalStorage } from "@/utils/local-store";
 import axios from "axios";
@@ -34,10 +35,21 @@ axiosInstance.interceptors.response.use(
   function (response) {
     return response;
   },
-  function (error) {
-    // Any status codes that fall outside the range of 2xx cause this function to trigger
-    // Do something with response error
-    return Promise.reject(error);
+  async function (error) {
+    const config = error.config;
+
+    console.log(config);
+
+    if (error.response.status === 403 && !config.sent) {
+      config.sent = true;
+      const res = await createNewAccessToken();
+      const accessToken = res.data.data.accessToken;
+      config.headers["Authorization"] = accessToken;
+      storeToken(accessToken);
+      return axiosInstance(config);
+    } else {
+      return Promise.reject(error);
+    }
   }
 );
 
