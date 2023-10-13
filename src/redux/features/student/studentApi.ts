@@ -33,6 +33,49 @@ const studentApi: any = baseApi.injectEndpoints({
       },
       providesTags: [tagTypes.STUDENT],
     }),
+    getStudentCourse: build.query({
+      query: (query: Record<string, any>) => ({
+        url: `/student/my-course`,
+        method: "GET",
+        params: query,
+      }),
+      transformResponse: ({ data, meta }: { data: any; meta: any }) => {
+        return {
+          course: data,
+          meta,
+        };
+      },
+      providesTags: [tagTypes.STUDENT],
+    }),
+    getStudentCourseSchedule: build.query({
+      query: (query: Record<string, any>) => ({
+        url: `/student/my-course-scheduels`,
+        method: "GET",
+        params: query,
+      }),
+      transformResponse: ({ data, meta }: { data: any; meta: any }) => {
+        return {
+          schedules: data,
+          meta,
+        };
+      },
+      providesTags: [tagTypes.STUDENT],
+    }),
+
+    getStudentAcademicSchedule: build.query({
+      query: (query: Record<string, any>) => ({
+        url: `/student/my-academic-info`,
+        method: "GET",
+        params: query,
+      }),
+      transformResponse: ({ data, meta }: { data: any; meta: any }) => {
+        return {
+          info: data,
+          meta,
+        };
+      },
+      providesTags: [tagTypes.STUDENT],
+    }),
     getStudentById: build.query({
       query: (id: string) => ({
         url: `/student/${id}`,
@@ -43,6 +86,36 @@ const studentApi: any = baseApi.injectEndpoints({
       },
       providesTags: [tagTypes.STUDENT],
     }),
+
+    getAllStudentMark: build.query({
+      query: () => ({
+        url: `/student-mark`,
+        method: "GET",
+      }),
+      transformResponse: ({ data, meta }: { data: any; meta: any }) => {
+        return {
+          students: data,
+          meta,
+        };
+      },
+      providesTags: [tagTypes.STUDENT],
+    }),
+    updateStudentMark: build.mutation({
+      query: (data) => ({
+        url: `/student-mark`,
+        method: "PATCH",
+        data,
+      }),
+      invalidatesTags: [tagTypes.STUDENT],
+    }),
+    updateStudentTotalMark: build.mutation({
+      query: (data) => ({
+        url: `/student-mark/total-final`,
+        method: "PATCH",
+        data,
+      }),
+      invalidatesTags: [tagTypes.STUDENT],
+    }),
   }),
 });
 
@@ -51,4 +124,10 @@ export const {
   useGetStudentQuery,
   useDeleteStudentMutation,
   useGetStudentByIdQuery,
+  useGetStudentCourseQuery,
+  useGetStudentCourseScheduleQuery,
+  useGetAllStudentMarkQuery,
+  useUpdateStudentMarkMutation,
+  useUpdateStudentTotalMarkMutation,
+  useGetStudentAcademicScheduleQuery,
 } = studentApi;

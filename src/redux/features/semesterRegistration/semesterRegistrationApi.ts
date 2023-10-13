@@ -13,6 +13,30 @@ const semesteremesterRegistrationApi: any = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.SEMESTER_REGISTRATION],
     }),
+    enrollSemesterRegistration: build.mutation({
+      query: (data) => ({
+        url: `${SEMESTER_REGISTRATION_API}/enroll`,
+        method: "POST",
+        data,
+      }),
+      invalidatesTags: [tagTypes.SEMESTER_REGISTRATION],
+    }),
+    withdrewSemesterRegistration: build.mutation({
+      query: (data) => ({
+        url: `${SEMESTER_REGISTRATION_API}/withdrew`,
+        method: "POST",
+        data,
+      }),
+      invalidatesTags: [tagTypes.SEMESTER_REGISTRATION],
+    }),
+    confirmSemesterRegistration: build.mutation({
+      query: (data) => ({
+        url: `${SEMESTER_REGISTRATION_API}/confirm`,
+        method: "POST",
+        data,
+      }),
+      invalidatesTags: [tagTypes.SEMESTER_REGISTRATION],
+    }),
     updateSemesterRegistration: build.mutation({
       query: ({ data, id }) => ({
         url: `${SEMESTER_REGISTRATION_API}/${id}`,
@@ -52,13 +76,31 @@ const semesteremesterRegistrationApi: any = baseApi.injectEndpoints({
       },
       providesTags: [tagTypes.SEMESTER_REGISTRATION],
     }),
+    getStudentSemesterRegistration: build.query({
+      query: (query: Record<string, any>) => ({
+        url: `${SEMESTER_REGISTRATION_API}/student/my-semester-registration`,
+        method: "GET",
+        params: query,
+      }),
+      transformResponse: ({ data, meta }: { data: any; meta: any }) => {
+        return {
+          semesterRegistration: data,
+          meta,
+        };
+      },
+      providesTags: [tagTypes.SEMESTER_REGISTRATION],
+    }),
   }),
 });
 
 export const {
   useAddSemesterRegistrationMutation,
+  useEnrollSemesterRegistrationMutation,
+  useWithdrewSemesterRegistrationMutation,
+  useConfirmSemesterRegistrationMutation,
   useUpdateSemesterRegistrationMutation,
   useDeleteSemesterRegistrationMutation,
   useGetSemesterRegistrationQuery,
   useGetSemesterRegistrationByIdQuery,
+  useGetStudentSemesterRegistrationQuery,
 } = semesteremesterRegistrationApi;

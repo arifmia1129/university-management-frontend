@@ -33,6 +33,34 @@ const facultyApi: any = baseApi.injectEndpoints({
       },
       providesTags: [tagTypes.FACULTY],
     }),
+    getFacultyCourse: build.query({
+      query: (query: Record<string, any>) => ({
+        url: `/faculty/my-course`,
+        method: "GET",
+        params: query,
+      }),
+      transformResponse: ({ data, meta }: { data: any; meta: any }) => {
+        return {
+          course: data,
+          meta,
+        };
+      },
+      providesTags: [tagTypes.FACULTY],
+    }),
+    getFacultyCourseStudent: build.query({
+      query: (query: Record<string, any>) => ({
+        url: `/faculty/my-course-student`,
+        method: "GET",
+        params: query,
+      }),
+      transformResponse: ({ data, meta }: { data: any; meta: any }) => {
+        return {
+          student: data,
+          meta,
+        };
+      },
+      providesTags: [tagTypes.FACULTY],
+    }),
     getFacultyById: build.query({
       query: (id: string) => ({
         url: `/faculty/${id}`,
@@ -51,4 +79,6 @@ export const {
   useGetFacultyQuery,
   useDeleteFacultyMutation,
   useGetFacultyByIdQuery,
+  useGetFacultyCourseQuery,
+  useGetFacultyCourseStudentQuery,
 } = facultyApi;

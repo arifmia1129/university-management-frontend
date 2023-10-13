@@ -6,6 +6,7 @@ import { Button, Result, Typography } from "antd";
 const { Paragraph, Text } = Typography;
 
 import { useGetSemesterRegistrationQuery } from "@/redux/features/semesterRegistration/semesterRegistrationApi";
+import Link from "next/link";
 
 export default function StudentRegistrationPage() {
   const { data } = useGetSemesterRegistrationQuery();
@@ -18,35 +19,24 @@ export default function StudentRegistrationPage() {
 
   return (
     <>
-      {isAvailable ? (
+      {!isAvailable ? (
         <Result
           status="error"
-          title="Submission Failed"
-          subTitle="Please check and modify the following information before resubmitting."
-        >
-          <div className="desc">
-            <Paragraph>
-              <Text
-                strong
-                style={{
-                  fontSize: 16,
-                }}
-              >
-                The content you submitted has the following error:
-              </Text>
-            </Paragraph>
-            <Paragraph>
-              <CloseCircleOutlined className="site-result-demo-error-icon" />{" "}
-              Your account has been frozen. <a>Thaw immediately &gt;</a>
-            </Paragraph>
-            <Paragraph>
-              <CloseCircleOutlined className="site-result-demo-error-icon" />{" "}
-              Your account is not yet eligible to apply.{" "}
-              <a>Apply Unlock &gt;</a>
-            </Paragraph>
-          </div>
-        </Result>
-      ) : null}
+          title="No Semester Registration Available Now"
+          subTitle="Please wait until authority start a new semester registration"
+        />
+      ) : (
+        <Result
+          status="success"
+          title="Semester Registration Available Now"
+          subTitle="As soon as confirm your semster registration"
+          extra={[
+            <Link href="/student/pre-registration">
+              <Button type="primary">Go</Button>
+            </Link>,
+          ]}
+        />
+      )}
     </>
   );
 }

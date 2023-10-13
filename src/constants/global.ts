@@ -216,3 +216,8 @@ export const semesterRegistrationStatusOptions = semesterRegistrationStatus.map(
     };
   }
 );
+
+export enum ExamType {
+  FINAL = "FINAL",
+  MIDTERM = "MIDTERM",
+}
