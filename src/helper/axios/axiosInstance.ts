@@ -3,10 +3,11 @@ import { createNewAccessToken, storeToken } from "@/services/auth.service";
 import { ICustomResponse } from "@/types";
 import { getFromLocalStorage } from "@/utils/local-store";
 import axios from "axios";
+import { getBaseUrl } from "../config/envConfig";
 
 const axiosInstance = axios.create({
-  baseURL: "https://some-domain.com/api/",
-  timeout: 1000,
+  baseURL: getBaseUrl(),
+  timeout: 10000,
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
@@ -37,8 +38,6 @@ axiosInstance.interceptors.response.use(
   },
   async function (error) {
     const config = error.config;
-
-    console.log(config);
 
     if (error.response.status === 403 && !config.sent) {
       config.sent = true;

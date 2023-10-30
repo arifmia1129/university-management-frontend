@@ -43,7 +43,7 @@ const ViewMyPayment = () => {
   const handleInitialPayment = async () => {
     // console.log(data);
     try {
-      const res = await initialPayment(data).unwrap();
+      const res = (await initialPayment(data).unwrap()) as any;
       router.push(res?.data);
     } catch (error) {}
   };
