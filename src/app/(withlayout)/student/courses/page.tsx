@@ -28,7 +28,6 @@ const StudentCoursesPage = () => {
   query["sortOrder"] = sortOrder;
 
   const { data, isLoading } = useGetStudentCourseQuery({ ...query });
-  console.log(data);
   const columns = [
     {
       title: "Course name",
