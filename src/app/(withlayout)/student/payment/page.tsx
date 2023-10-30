@@ -40,12 +40,11 @@ const ViewMyPayment = () => {
 
   const [initialPayment] = useInitialPaymentMutation();
 
-  const handleInitialPayment = async (data: any) => {
+  const handleInitialPayment = async () => {
     // console.log(data);
     try {
       const res = await initialPayment(data).unwrap();
-      // console.log(res);
-      //   router.push(res?.paymentUrl);
+      router.push(res?.data);
     } catch (error) {}
   };
 
@@ -268,15 +267,7 @@ const ViewMyPayment = () => {
           <>
             {data.paymentStatus === PaymentStatus.PENDING && (
               <>
-                <Button
-                  type="primary"
-                  onClick={() => {
-                    setAcademicSemesterId(data?.academicSemesterId);
-                    setOpen(true);
-                    setPaymentType(PaymentType.PARTIAL);
-                  }}
-                  style={{ marginLeft: "3px" }}
-                >
+                <Button type="primary" onClick={handleInitialPayment}>
                   Pay Partial
                 </Button>
                 <Button
@@ -295,15 +286,7 @@ const ViewMyPayment = () => {
 
             {data.paymentStatus === PaymentStatus.PARTIAL_PAID && (
               <>
-                <Button
-                  type="primary"
-                  onClick={() => {
-                    setAcademicSemesterId(data?.academicSemesterId);
-                    setOpen(true);
-                    setPaymentType(PaymentType.FULL);
-                  }}
-                  style={{ marginLeft: "3px" }}
-                >
+                <Button type="primary" onClick={handleInitialPayment}>
                   full payment
                 </Button>
               </>

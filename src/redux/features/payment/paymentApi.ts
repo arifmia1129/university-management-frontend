@@ -23,7 +23,7 @@ const paymentApi = baseApi.injectEndpoints({
     }),
     initialPayment: build.mutation({
       query: (data: any) => ({
-        url: `${BASE_STUDENT_SEMESTER_PAYMENT}/initiate-payment`,
+        url: `${BASE_STUDENT_SEMESTER_PAYMENT}/initiate`,
         method: "POST",
         data,
       }),
