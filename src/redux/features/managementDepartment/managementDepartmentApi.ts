@@ -39,7 +39,7 @@ const managementDepartmentApi: any = baseApi.injectEndpoints({
       providesTags: [tagTypes.MANAGEMENT_DEPARTMENT],
     }),
     getManagementDepartment: build.query({
-      query: (query: Record<string, any>) => ({
+      query: (query: any) => ({
         url: MANAGEMENT_DEPARTMENT_API,
         method: "GET",
         params: query,

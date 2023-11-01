@@ -39,7 +39,7 @@ const offeredCourseSectionApi: any = baseApi.injectEndpoints({
       providesTags: [tagTypes.OFFERED_COURSE_SECTION],
     }),
     getOfferedCourseSection: build.query({
-      query: (query: Record<string, any>) => ({
+      query: (query: any) => ({
         url: OFFERED_COURSE_SECTION_API,
         method: "GET",
         params: query,

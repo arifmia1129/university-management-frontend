@@ -24,7 +24,7 @@ import dayjs from "dayjs";
 import DeleteModal from "@/components/Modal/DeleteModal";
 
 const ManagementDepartment = () => {
-  const fetchQuery: Record<string, any> = {};
+  const fetchQuery: any = {};
 
   const [size, setSize] = useState<number>(10);
   const [page, setPage] = useState<number>(1);

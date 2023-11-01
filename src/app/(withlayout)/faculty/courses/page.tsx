@@ -10,7 +10,7 @@ import { useGetFacultyCourseQuery } from "@/redux/features/faculty/facultyApi";
 import ActionBar from "@/components/ui/ActionBar/ActionBar";
 
 const FacultyCoursesPage = () => {
-  const query: Record<string, any> = {};
+  const query: any = {};
 
   const [page, setPage] = useState<number>(1);
   const [size, setSize] = useState<number>(10);

@@ -20,7 +20,7 @@ const adminApi: any = baseApi.injectEndpoints({
       invalidatesTags: [tagTypes.ADMIN],
     }),
     getAdmin: build.query({
-      query: (query: Record<string, any>) => ({
+      query: (query: any) => ({
         url: `/admin`,
         method: "GET",
         params: query,

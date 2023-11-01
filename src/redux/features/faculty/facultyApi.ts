@@ -20,7 +20,7 @@ const facultyApi: any = baseApi.injectEndpoints({
       invalidatesTags: [tagTypes.FACULTY],
     }),
     getFaculty: build.query({
-      query: (query: Record<string, any>) => ({
+      query: (query: any) => ({
         url: `/faculty`,
         method: "GET",
         params: query,
@@ -34,7 +34,7 @@ const facultyApi: any = baseApi.injectEndpoints({
       providesTags: [tagTypes.FACULTY],
     }),
     getFacultyCourse: build.query({
-      query: (query: Record<string, any>) => ({
+      query: (query: any) => ({
         url: `/faculty/my-course`,
         method: "GET",
         params: query,
@@ -48,7 +48,7 @@ const facultyApi: any = baseApi.injectEndpoints({
       providesTags: [tagTypes.FACULTY],
     }),
     getFacultyCourseStudent: build.query({
-      query: (query: Record<string, any>) => ({
+      query: (query: any) => ({
         url: `/faculty/my-course-student`,
         method: "GET",
         params: query,

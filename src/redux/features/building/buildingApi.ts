@@ -39,7 +39,7 @@ const buildingApi: any = baseApi.injectEndpoints({
       providesTags: [tagTypes.BUILDING],
     }),
     getBuilding: build.query({
-      query: (query: Record<string, any>) => ({
+      query: (query: any) => ({
         url: BUILDING_API,
         method: "GET",
         params: query,

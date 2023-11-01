@@ -12,8 +12,8 @@ import {
 } from "@/redux/features/faculty/facultyApi";
 import ActionBar from "@/components/ui/ActionBar/ActionBar";
 
-const FacultyCourseStudentPage = ({ searchParams }: Record<string, any>) => {
-  const query: Record<string, any> = {};
+const FacultyCourseStudentPage = ({ searchParams }: any) => {
+  const query: any = {};
 
   const { courseId, offeredCourseSectionId } = searchParams;
 

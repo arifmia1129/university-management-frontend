@@ -28,7 +28,7 @@ import {
 } from "@/redux/features/academicFaculty/academicFacultyApi";
 
 const AcademicFaculty = () => {
-  const fetchQuery: Record<string, any> = {};
+  const fetchQuery: any = {};
 
   const [size, setSize] = useState<number>(10);
   const [page, setPage] = useState<number>(1);

@@ -39,7 +39,7 @@ const courseApi: any = baseApi.injectEndpoints({
       providesTags: [tagTypes.COURSE],
     }),
     getCourse: build.query({
-      query: (query: Record<string, any>) => ({
+      query: (query: any) => ({
         url: COURSE_API,
         method: "GET",
         params: query,

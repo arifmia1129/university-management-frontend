@@ -19,7 +19,7 @@ const CreateOfferedCourse = () => {
     useState<string>("");
   const [academicDepartmentId, setAcademicDepartmentId] = useState<string>("");
 
-  const query: Record<string, any> = {};
+  const query: any = {};
 
   if (semesterRegistrationId) {
     query.semesterRegistrationId = semesterRegistrationId;

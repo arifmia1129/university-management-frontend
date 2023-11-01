@@ -1,7 +1,4 @@
-export const getErrorMessageByPropertyName = (
-  obj: Record<string, any>,
-  path: any
-) => {
+export const getErrorMessageByPropertyName = (obj: any, path: any) => {
   const properties = path.split(".");
 
   let value = obj;

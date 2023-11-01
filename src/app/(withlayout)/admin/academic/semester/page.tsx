@@ -25,7 +25,7 @@ import { useGetAcademicDepartmentQuery } from "@/redux/features/academicDepartme
 import { useGetAcademicSemesterQuery } from "@/redux/features/academicSemester/academicSemesterApi";
 
 const AcademicSemester = () => {
-  const fetchQuery: Record<string, any> = {};
+  const fetchQuery: any = {};
 
   const [size, setSize] = useState<number>(10);
   const [page, setPage] = useState<number>(1);

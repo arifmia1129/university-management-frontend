@@ -63,7 +63,7 @@ const semesteremesterRegistrationApi: any = baseApi.injectEndpoints({
       providesTags: [tagTypes.SEMESTER_REGISTRATION],
     }),
     getSemesterRegistration: build.query({
-      query: (query: Record<string, any>) => ({
+      query: (query: any) => ({
         url: SEMESTER_REGISTRATION_API,
         method: "GET",
         params: query,
@@ -77,7 +77,7 @@ const semesteremesterRegistrationApi: any = baseApi.injectEndpoints({
       providesTags: [tagTypes.SEMESTER_REGISTRATION],
     }),
     getStudentSemesterRegistration: build.query({
-      query: (query: Record<string, any>) => ({
+      query: (query: any) => ({
         url: `${SEMESTER_REGISTRATION_API}/student/my-semester-registration`,
         method: "GET",
         params: query,

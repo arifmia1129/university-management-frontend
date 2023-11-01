@@ -6,7 +6,7 @@ export const BASE_STUDENT_SEMESTER_PAYMENT = "/payment";
 const paymentApi = baseApi.injectEndpoints({
   endpoints: (build: any) => ({
     myPayments: build.query({
-      query: (arg: Record<string, any>) => {
+      query: (arg: any) => {
         return {
           url: `${BASE_STUDENT_SEMESTER_PAYMENT}/my-payment`,
           method: "GET",

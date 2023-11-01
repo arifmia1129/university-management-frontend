@@ -39,7 +39,7 @@ const academicSemesterApi: any = baseApi.injectEndpoints({
       providesTags: [tagTypes.ACADEMIC_SEMESTER],
     }),
     getAcademicSemester: build.query({
-      query: (query: Record<string, any>) => ({
+      query: (query: any) => ({
         url: ACADEMIC_SEMESTER,
         method: "GET",
         params: query,

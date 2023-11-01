@@ -7,7 +7,7 @@ import { useGetStudentAcademicScheduleQuery } from "@/redux/features/student/stu
 import { Card, Col, Row, Tag } from "antd";
 
 const AcademicReport = () => {
-  const query: Record<string, any> = {};
+  const query: any = {};
   const { data, isLoading } = useGetStudentAcademicScheduleQuery({ ...query });
 
   const columns = [

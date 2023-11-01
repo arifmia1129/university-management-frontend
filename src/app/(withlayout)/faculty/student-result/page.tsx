@@ -21,11 +21,11 @@ import BaseRow from "@/components/ui/BaseRow";
 import { ExamType } from "@/constants/global";
 import ActionBar from "@/components/ui/ActionBar/ActionBar";
 
-const StudentResultPage = ({ searchParams }: Record<string, any>) => {
+const StudentResultPage = ({ searchParams }: any) => {
   //   const [updateFinalMarks] = useUpdateFinalMarksMutation();
   const [academicSemesterId, setAcademicSemesterId] = useState<string>();
 
-  const query: Record<string, any> = {};
+  const query: any = {};
 
   const { studentId, courseId, offeredCourseSectionId } = searchParams;
 

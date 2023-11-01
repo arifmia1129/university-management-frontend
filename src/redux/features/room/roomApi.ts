@@ -39,7 +39,7 @@ const RoomApi: any = baseApi.injectEndpoints({
       providesTags: [tagTypes.ROOM],
     }),
     getRoom: build.query({
-      query: (query: Record<string, any>) => ({
+      query: (query: any) => ({
         url: ROOM_API,
         method: "GET",
         params: query,

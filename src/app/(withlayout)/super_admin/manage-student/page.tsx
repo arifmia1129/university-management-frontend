@@ -24,7 +24,7 @@ import {
 import { useGetStudentQuery } from "@/redux/features/student/studentApi";
 
 const AdminList = () => {
-  const fetchQuery: Record<string, any> = {};
+  const fetchQuery: any = {};
 
   const [size, setSize] = useState<number>(10);
   const [page, setPage] = useState<number>(1);

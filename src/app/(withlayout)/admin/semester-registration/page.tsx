@@ -27,7 +27,7 @@ import { useGetRoomQuery } from "@/redux/features/room/roomApi";
 import { useGetSemesterRegistrationQuery } from "@/redux/features/semesterRegistration/semesterRegistrationApi";
 
 const AllSemesterRegistration = () => {
-  const fetchQuery: Record<string, any> = {};
+  const fetchQuery: any = {};
 
   const [size, setSize] = useState<number>(10);
   const [page, setPage] = useState<number>(1);

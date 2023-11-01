@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 
 type FormConfig = {
-  defaultValues?: Record<string, any>;
+  defaultValues?: any;
   resolver?: any;
 };
 

@@ -24,7 +24,7 @@ const ViewMyPayment = () => {
   const [sortOrder, setSortOrder] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
   const router = useRouter();
-  const query: Record<string, any> = {};
+  const query: any = {};
   query["limit"] = size;
   query["page"] = page;
   query["sortBy"] = sortBy;
@@ -36,11 +36,11 @@ const ViewMyPayment = () => {
     query["searchTerm"] = debouncedSearchTerm;
   }
 
-  const { data, isLoading } = useMyPaymentsQuery({ ...query });
+  const { data: payments, isLoading } = useMyPaymentsQuery({ ...query });
 
   const [initialPayment] = useInitialPaymentMutation();
 
-  const handleInitialPayment = async () => {
+  const handleInitialPayment = async (data: any) => {
     // console.log(data);
     try {
       const res = (await initialPayment(data).unwrap()) as any;
@@ -68,7 +68,7 @@ const ViewMyPayment = () => {
 
   const paginationOptions = {
     pageSize: size,
-    total: data?.meta,
+    total: 0,
     pageSizeOptions: [5, 10, 20],
     showSizeChanger: true,
     onChange: handleChangePaginationOptions,
@@ -328,14 +328,14 @@ const ViewMyPayment = () => {
         </div>
       </ActionBar>
 
-      <UMTable
+      {/* <UMTable
         loading={isLoading}
         columns={columns}
-        dataSource={data?.data}
+        dataSource={payments?.data}
         paginationOptions={paginationOptions}
         handleChangeTableOptions={handleChangeTableOptions}
         showPagination={true}
-      />
+      /> */}
     </>
   );
 };

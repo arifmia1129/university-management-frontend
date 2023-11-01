@@ -15,7 +15,7 @@ import {
 } from "@ant-design/icons";
 
 const StudentCoursesPage = () => {
-  const query: Record<string, any> = {};
+  const query: any = {};
 
   const [page, setPage] = useState<number>(1);
   const [size, setSize] = useState<number>(10);

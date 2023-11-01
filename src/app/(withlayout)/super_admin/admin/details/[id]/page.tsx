@@ -7,11 +7,7 @@ import { superAdminItems } from "@/constants/breadCrumbItem";
 import { useGetAdminByIdQuery } from "@/redux/features/admin/adminApi";
 import { Descriptions, Card, Avatar, Divider, Row } from "antd";
 
-export default function AdminDetails({
-  params,
-}: {
-  params: Record<string, any>;
-}) {
+export default function AdminDetails({ params }: { params: any }) {
   const { data: admin, isLoading } = useGetAdminByIdQuery(params?.id);
   // //console.log(data);
   const items = [...superAdminItems];
